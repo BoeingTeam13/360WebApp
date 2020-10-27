@@ -1,0 +1,27 @@
+nav {
+    background-color: #0066B3;
+    color: white;
+    position: fixed;
+}
+
+.nav_text {
+    color: white;
+    display: inline-block;
+    margin-right: 50px;
+    font-size: large;
+}
+
+.nav-text {
+    margin-right: 2rem;
+}
+
+.live-map-img {
+    height: 40px;
+    width: auto;
+    margin-right: 8px;
+}
+
+.custom-nav-toggle {
+    color: red;
+    background-color: white;
+}
