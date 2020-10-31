@@ -1,3 +1,21 @@
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Montserrat";
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
 nav {
     background-color: #0066B3;
     position: fixed;
@@ -19,11 +37,50 @@ nav {
     margin-right: 8px;
 }
 
-.custom-nav-toggle {
-    color: red;
-    background-color: white;
+.currentLink {
+    color: #262626 !important;
+    font-weight: bolder;
 }
 
-.currentLink {
-    color: black !important;
+
+.content-selection {
+    background-color: green;
+}
+
+
+.content-selection-button {
+    margin: 5% 3% 5% 0%;
+    margin: 50px 20px 50px 50px;
+}
+
+.heading-lg {
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.5;
+    font-size: 3.5rem;
+    font-weight: 900 !important;
+    color: white;
+    margin: 50px 50px
+}
+
+#title {
+    background-color: #ff4c68;
+    color: white;
+}
+
+#MAIN {
+    background-color: #1b8ed0;
+}
+
+.row-tester {
+    margin-right: 0px;
+}
+
+.container-fluid {
+    padding: 3% 15% 7%;
+}
+
+.title-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
