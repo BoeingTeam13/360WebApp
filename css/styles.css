@@ -38,13 +38,8 @@ nav {
 }
 
 .currentLink {
-    color: #262626 !important;
+    color: #303030 !important;
     font-weight: bolder;
-}
-
-
-.content-selection {
-    background-color: green;
 }
 
 
@@ -83,4 +78,24 @@ nav {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.cta-camera {
+    color: white;
+}
+
+.cta-map {
+    color: white;
+}
+
+.live-map-custom-col {
+    display: block;
+    margin-top: 100px;
+    margin-left: 45%;
+    margin-right: 50%;
+}
+
+.live-cam-custom-row {
+    margin-top: 100px;
+    text-align: center;
 }
