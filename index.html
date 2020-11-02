@@ -24,9 +24,73 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
 </head>
 
 <body>
+
+    
+    <!-- Database Connection -->
+    <!-- Should be moved once we figure out where/how we are going to do AR -->
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+          apiKey: "AIzaSyBtqXJjbyCsiFlxnKNmSKDImtJQc1AJFu0",
+          authDomain: "boeing360-f7d3e.firebaseapp.com",
+          databaseURL: "https://boeing360-f7d3e.firebaseio.com",
+          projectId: "boeing360-f7d3e",
+          storageBucket: "boeing360-f7d3e.appspot.com",
+          messagingSenderId: "450248035339",
+          appId: "1:450248035339:web:9f55ef2f698f796ecd0b0e",
+          measurementId: "G-XJJK26C7VL"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.database();
+        var cityRef = database.ref('City');
+        var airportRef = database.ref('Airport');
+        var flightRef = database.ref('Flight');
+        var poiRef = database.ref('PointOfInterest');
+
+        var cityData = {
+            City_Name: "Orange County",
+            State_Name: "California"
+        }
+
+        var airportData = { 
+            Airport_Code: "SNA",
+            Airport_Name: "John Wayne",
+            City: "Orange County",
+            State: "California"
+        }
+
+        var flightData = { 
+            Flight_code: "1234",
+            Departure_City: "Seattle",
+            Departure_state: "Washington",
+            Arrival_City: "Orange County",
+            Arrival_state: "California",
+        }
+
+        var poiData = { 
+            POI_code: "1",
+            POI_Name: "Disney Land",
+            POI_City: "Anaheim",
+            POI_State: "California",
+            POI_Lat: "33.8105° N",
+            POI_Long: "117.9190° W",
+            POI_Description: "Disney themed theme park located in Anaheim CA",
+        }
+
+        cityRef.push(cityData);
+        airportRef.push(airportData);
+        flightRef.push(flightData);
+        poiRef.push(poiData);
+      </script>
+
 
     <!-- NAVIGATION -->
     <section id="NAV">
