@@ -102,3 +102,17 @@ nav {
     text-align: center;
     margin-top: 50px;
 }
+
+
+/* LIVE-CAM Page */
+.link-imgs {
+    height: 100px;
+    width: auto;
+    margin: 100px;
+}
+
+.camera-view-headings {
+    font-size: 1.5rem;
+}
+
+/* Front image */
