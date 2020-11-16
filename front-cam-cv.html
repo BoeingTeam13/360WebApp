@@ -58,6 +58,46 @@
         </nav>
     </section>
 
+
+    <section class="camera-content-view">
+
+        <!-- Camera Testing Section -->
+
+        <!-- Test 1 -->
+        <embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org" version="videolan" width="320" height="240" target="rtsp://192.168.56.1:8080/user=admin&password=admin&channel=1&stream=1.sdp?" id="vlc" />
+        <script type="text/javascript">
+            var vlc = document.getElementById("vlc");
+            vlc.audio.toggleMute();
+        </script>
+
+        <!-- Test 2 -->
+
+        <video controls width="250">
+
+            <source src="videos/test_video.mp4" type="video/mp4">
+
+        </video>
+
+        <!-- Test 3 -->
+
+        <embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org" version="VideoLAN.VLCPlugin.2" width="100%" height="100%" id="vlc" loop="yes" autoplay="yes" target="http://192.168.56.1:8080/"></embed>
+
+
+        <!-- Test 4 -->
+
+        <OBJECT classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" codebase="http://downloads.videolan.org/pub/videolan/vlc/latest/win32/axvlc.cab" width="640" height="480" id="vlc" events="True">
+            <param name="Src" value="http://192.168.56.1:8080" />
+            <param name="ShowDisplay" value="True" />
+            <param name="AutoLoop" value="False" />
+            <param name="AutoPlay" value="True" />
+            <embed id="vlcEmb" type="application/x-google-vlc-plugin" version="VideoLAN.VLCPlugin.2" autoplay="yes" loop="no" width="640" height="480" target="http://192.168.56.1:8080"></embed>
+        </OBJECT>
+
+        <script src="" async defer></script>
+
+    </section>
+
+
     <script src="" async defer></script>
 </body>
 
