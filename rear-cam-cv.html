@@ -26,6 +26,8 @@
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+
+    <script src="node_modules/kaleidoscopejs/dist/kaleidoscope.min.js"></script>
 </head>
 
 <body>
@@ -57,6 +59,45 @@
             </div>
         </nav>
     </section>
+
+    <section class="camera-content-view">
+
+        <!-- Camera Testing Section -->
+
+        <center style="display:flex; margin-top: 100px;">
+
+            <div id="target">
+                <canvas width="640" height="360" style="height: 360px; width: 640px; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: rgba(0,0,0,0); cursor: -webkit-grab; cursor: -moz-grab; cursor: grab;"></canvas>
+            </div>
+            <script type="text/javascript" charset="utf-8" src="node_modules/kaleidoscopejs/dist/kaleidoscope.min.js"> </script>
+
+            <script type="text/javascript" charset="utf-8">
+                window.addEventListener('DOMContentLoaded', function(e) {
+                    this.viewer = new Kaleidoscope.Video({
+                        autoplay: true,
+                        muted: true,
+                        height: 360,
+                        width: 640,
+                        // Can be switched out for HTTP IP Camera stream
+                        // Currently testing with the following demo 360 video from the author of Kaleidoscope
+                        // TODO: Figure out how to host 360 files like this
+                        source: 'http://thiago.me/demo-360/cool.mp4',
+                        containerId: '#target'
+                    });
+                    this.viewer.render();
+                    document.body.addEventListener('click', function() {
+                        this.viewer.play();
+                    }.bind(this));
+                    document.querySelector('#target').addEventListener('touchend', this.viewer.play.bind(this.viewer));
+                })
+            </script>
+        </center>
+
+
+        <script src="" async defer></script>
+
+    </section>
+
 
     <script src="" async defer></script>
 </body>
