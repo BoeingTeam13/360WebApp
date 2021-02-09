@@ -2,12 +2,7 @@
 
 <h1>This is the live maps page!</h1>
 
-
-
-
-<div id="map" style="width:250px; height:250px;"></div>
-
-
+<div id="map" style="width:500px; height:500px; position: absolute; top: 25%; left: 35%;"></div>
 
 <script type="text/javascript" charset="utf-8">
     let map, infoWindow;
@@ -20,6 +15,35 @@
             },
             zoom: 6,
         });
+
+        var locations = [
+            ['Hemmingson Center', 47.667100, -117.399600],
+            ['McCarthy Center', 47.665300, -117.399100],
+            ['Zag Shop', 47.667700,	-117.397700],
+            ['Foley Library', 47.666500, -117.400900],
+            ['College Hall', 47.668100, -117.402500],
+            ['Herak', 47.666600, -117.402200],
+            ['Jepsen', 47.667200, -117.405000],
+            ['Riverfront Pavilion', 47.662600, -117.419000],
+            ['Numerica Skate Ribbon', 47.660700, -117.422500],
+            ['Forza Coffee', 47.667100, -117.396200]
+        ];
+
+        var marker, i;
+        var infowindow = new google.maps.InfoWindow();
+
+        for (i = 0; i < locations.length; i++) {  
+            marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: map
+        });
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+            infowindow.setContent(locations[i][0]);
+            infowindow.open(map, marker);
+            }
+        })(marker, i));
+        }
 
         infoWindow = new google.maps.InfoWindow();
         const locationButton = document.createElement("button");
@@ -61,8 +85,5 @@
         infoWindow.open(map);
     }
 </script>
-
-
-
 
 <%- include('partials/footer') -%>
