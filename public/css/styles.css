@@ -127,3 +127,22 @@ footer {
 }
 
 /* Front image */
+.videoSection {
+
+}
+
+#footer {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+}
+
+.LiveCamButton {
+    color: white;
+}
+
+.placeholder-box {
+    width: 1180px;
+    height: 720px;
+    color: rgb(108, 108, 255);
+}
