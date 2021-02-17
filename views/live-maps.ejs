@@ -8,14 +8,75 @@
     let map, infoWindow;
 
     function initMap() {
+
         map = new google.maps.Map(document.getElementById("map"), {
             center: {
                 lat: -34.397,
                 lng: 150.644
             },
             zoom: 6,
+            mapType: google.maps.MapTypeId.ROADMAP,
+            disableDefaultUI: true,
+            mapTypeControl: true,
+            zoomControl: true,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                position: google.maps.ControlPosition.TOP_RIGHT
+            },
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.TOP_RIGHT
+            }
         });
 
+        //code for radius circle
+        earthRadii = {
+        mi: 3963.1676,
+        km: 6378.1,
+        ft: 20925524.9,
+        mt: 6378100,
+        "in": 251106299,
+        yd: 6975174.98,
+        fa: 3487587.49,
+        na: 3443.89849,
+        ch: 317053.408,
+        rd: 1268213.63,
+        fr: 31705.3408
+        };
+        polygonDestructionHandler = function() {
+        return this.setMap(null);
+        };
+        clearMarkers = function() {
+        var i, len, m;
+        for (i = 0, len = markers.length; i < len; i++) {
+            m = markers[i];
+            m.setMap(null);
+        }
+        return markers = [];
+        };
+        circleDrawHandler = function(e) {
+        var circle, radius, select, unitKey;
+        radius = 500; //meters
+        circle = new google.maps.Circle({
+            center: e.latLng,
+            clickable: true,
+            draggable: false,
+            editable: false,
+            fillColor: '#004de8',
+            fillOpacity: 0.27,
+            map: map,
+            radius: radius,
+            strokeColor: '#004de8',
+            strokeOpacity: 0.62,
+            strokeWeight: 1
+        });
+        console.log(radius)
+        google.maps.event.addListener(circle, 'rightclick', polygonDestructionHandler);
+        console.log('clicked!')
+        return google.maps.event.addListener(circle, 'click', circleDrawHandler);
+        };
+        google.maps.event.addListener(map, 'click', circleDrawHandler);
+        //end of radius circle code
+    
         var locations = [
             ['Hemmingson Center', 47.667100, -117.399600],
             ['McCarthy Center', 47.665300, -117.399100],
@@ -44,6 +105,7 @@
             }
         })(marker, i));
         }
+
 
         infoWindow = new google.maps.InfoWindow();
         const locationButton = document.createElement("button");
