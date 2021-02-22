@@ -2,9 +2,13 @@
 
 <h1>This is the live maps page!</h1>
 
-<div id="map" style="width:500px; height:500px; position: absolute; top: 25%; left: 35%;"></div>
 
-<script type="text/javascript" charset="utf-8">
+
+<div id="mapid" style="height: 500px; width: 500px; position: absolute; top: 26%; left: 30%;"></div>
+<div id="coord"></div>
+<button type="button" onclick="showPosition();">Show Position</button>
+
+<!-- <script type="text/javascript" charset="utf-8">
     let map, infoWindow;
 
     function initMap() {
@@ -146,6 +150,56 @@
         );
         infoWindow.open(map);
     }
+</script> -->
+
+<script>
+    var mymap = L.map('mapid').setView([47.6670, -117.4014], 11);
+    var marker = L.marker([0, 0]).addTo(mymap);
+    const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+    const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    const tiles = L.tileLayer(tileUrl, { attribution });
+    tiles.addTo(mymap);
+
+    var locations = [
+            ['Hemmingson Center', 47.667100, -117.399600],
+            ['McCarthy Center', 47.665300, -117.399100],
+            ['Zag Shop', 47.667700,	-117.397700],
+            ['Foley Library', 47.666500, -117.400900],
+            ['College Hall', 47.668100, -117.402500],
+            ['Herak', 47.666600, -117.402200],
+            ['Jepsen', 47.667200, -117.405000],
+            ['Riverfront Pavilion', 47.662600, -117.419000],
+            ['Numerica Skate Ribbon', 47.660700, -117.422500],
+            ['Forza Coffee', 47.667100, -117.396200]
+        ];
+
+    var x = document.getElementById("coord");
+    for (i = 0; i < locations.length; i++) {  
+        marker = L.marker([locations[i][1], locations[i][2]]).bindPopup(locations[i][0]).addTo(mymap);
+    }
+
+    function showPosition() {
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(drawRadius);
+        }else{
+            x.innerHTML = "Not able to get current location"
+        }
+    }
+    var circle;
+    function drawRadius(position){
+        if (mymap.hasLayer(circle)) {
+            circle.remove();
+        }
+        circle = L.circle([position.coords.latitude, position.coords.longitude], {
+            color: 'red',
+            radius: 1609.34
+        }).addTo(mymap);
+    }
+    var staticCircle = L.circle([47.6670, -117.4014], {
+        color: 'red',
+        radius: 804
+    }).addTo(mymap);
 </script>
+
 
 <%- include('partials/footer') -%>
