@@ -2,11 +2,12 @@
 
 <h1>This is the live maps page!</h1>
 
-
-
 <div id="mapid" style="height: 500px; width: 500px; position: absolute; top: 26%; left: 30%;"></div>
 <div id="coord"></div>
-<button type="button" onclick="showPosition();">Show Position</button>
+<div id="Lat"></div>
+<div id="Long"></div>
+<div id="Error"></div>
+<button type="button" onclick="runSim();">Start Simulation</button>
 
 <!-- <script type="text/javascript" charset="utf-8">
     let map, infoWindow;
@@ -153,31 +154,78 @@
 </script> -->
 
 <script>
+    var lat = 47.667477;
+    var long = -117.409321;
     var mymap = L.map('mapid').setView([47.6670, -117.4014], 11);
-    var marker = L.marker([0, 0]).addTo(mymap);
     const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
     const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     const tiles = L.tileLayer(tileUrl, { attribution });
     tiles.addTo(mymap);
-
+    var staticCircle = L.circle([lat, long], {
+            color: 'red',
+            radius: 200
+        });
+    staticCircle.addTo(mymap);
+    var markers = {};
     var locations = [
-            ['Hemmingson Center', 47.667100, -117.399600],
-            ['McCarthy Center', 47.665300, -117.399100],
-            ['Zag Shop', 47.667700,	-117.397700],
-            ['Foley Library', 47.666500, -117.400900],
-            ['College Hall', 47.668100, -117.402500],
-            ['Herak', 47.666600, -117.402200],
-            ['Jepsen', 47.667200, -117.405000],
-            ['Riverfront Pavilion', 47.662600, -117.419000],
-            ['Numerica Skate Ribbon', 47.660700, -117.422500],
-            ['Forza Coffee', 47.667100, -117.396200]
-        ];
+        {
+            id: '1',
+            name: 'Hemmingson Center',
+            latlng: [47.667100, -117.399600]
+        },
+        {
+            id: '2',
+            name: 'McCarthy Center',
+            latlng: [47.665300, -117.399100]   
+        },
+        {
+            id: '3',
+            name: 'Zag Shop',
+            latlng: [47.667700,	-117.397700]   
+        },
+        {
+            id: '4',
+            name: 'Foley Library',
+            latlng: [47.666500, -117.400900]   
+        },
+        {
+            id: '5',
+            name: 'College Hall',
+            latlng: [47.668100, -117.402500]   
+        },
+        {
+            id: '6',
+            name: 'Herak',
+            latlng: [47.666600, -117.402200]   
+        },
+        {
+            id: '7',
+            name: 'Jepsen',
+            latlng: [47.667200, -117.405000]   
+        },
+        {
+            id: '8',
+            name: 'Riverfront Pavilion',
+            latlng: [47.662600, -117.419000]   
+        },
+        {
+            id: '9',
+            name: 'Numerica Skate Ribbon',
+            latlng: [47.660700, -117.422500]   
+        },
+        {
+            id: '10',
+            name: 'Forza Coffee',
+            latlng: [47.667100, -117.396200]   
+        }
+    ];
 
-    var x = document.getElementById("coord");
-    for (i = 0; i < locations.length; i++) {  
-        marker = L.marker([locations[i][1], locations[i][2]]).bindPopup(locations[i][0]).addTo(mymap);
+        
+    for (var i = 0; i < locations.length; i++) {  
+        var poi = locations[i];
+        markers[poi.id] = L.marker(poi.latlng).bindPopup(poi.name);
     }
-
+    
     function showPosition() {
         if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition(drawRadius);
@@ -193,13 +241,41 @@
         circle = L.circle([position.coords.latitude, position.coords.longitude], {
             color: 'red',
             radius: 1609.34
-        }).addTo(mymap);
+        }).addTo(mymap)
     }
-    var staticCircle = L.circle([47.6670, -117.4014], {
-        color: 'red',
-        radius: 804
-    }).addTo(mymap);
+
+    var interval;
+    function runSim(){
+        interval = setInterval(update, 1000);
+    }
+
+    var tempMarker;
+    function update(){
+        if(long > -117.396437){
+            clearInterval(interval);
+            document.getElementById("Error").innerHTML = "You have walked all the way accross campus!!!";
+            return;
+        }
+        long += 0.001000;
+        document.getElementById("Lat").innerHTML = lat;
+        document.getElementById("Long").innerHTML = long.toFixed(6);
+        if (mymap.hasLayer(staticCircle)) {
+            staticCircle.remove();
+        }
+        staticCircle = L.circle([lat, long], {
+            color: 'red',
+            radius: 200
+        }).addTo(mymap);
+        for(var i = 0; i < locations.length; i++){
+            var poi = locations[i];
+            var dist = mymap.distance(poi.latlng, staticCircle.getLatLng());
+            var inSide = dist < staticCircle.getRadius();
+            if(!inSide){
+                markers[poi.id].remove();
+            }else{
+                markers[poi.id].addTo(mymap);
+            }
+        }  
+    }
 </script>
-
-
 <%- include('partials/footer') -%>
