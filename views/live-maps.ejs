@@ -162,64 +162,12 @@
     const tiles = L.tileLayer(tileUrl, { attribution });
     tiles.addTo(mymap);
     var staticCircle = L.circle([lat, long], {
-            color: 'red',
-            radius: 200
-        });
+        color: 'red',
+        radius: 200
+    });
     staticCircle.addTo(mymap);
     var markers = {};
-    var locations = [
-        {
-            id: '1',
-            name: 'Hemmingson Center',
-            latlng: [47.667100, -117.399600]
-        },
-        {
-            id: '2',
-            name: 'McCarthy Center',
-            latlng: [47.665300, -117.399100]   
-        },
-        {
-            id: '3',
-            name: 'Zag Shop',
-            latlng: [47.667700,	-117.397700]   
-        },
-        {
-            id: '4',
-            name: 'Foley Library',
-            latlng: [47.666500, -117.400900]   
-        },
-        {
-            id: '5',
-            name: 'College Hall',
-            latlng: [47.668100, -117.402500]   
-        },
-        {
-            id: '6',
-            name: 'Herak',
-            latlng: [47.666600, -117.402200]   
-        },
-        {
-            id: '7',
-            name: 'Jepsen',
-            latlng: [47.667200, -117.405000]   
-        },
-        {
-            id: '8',
-            name: 'Riverfront Pavilion',
-            latlng: [47.662600, -117.419000]   
-        },
-        {
-            id: '9',
-            name: 'Numerica Skate Ribbon',
-            latlng: [47.660700, -117.422500]   
-        },
-        {
-            id: '10',
-            name: 'Forza Coffee',
-            latlng: [47.667100, -117.396200]   
-        }
-    ];
-
+    let locations = JSON.parse('<%-pois%>');
         
     for (var i = 0; i < locations.length; i++) {  
         var poi = locations[i];
