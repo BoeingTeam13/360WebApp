@@ -7,6 +7,7 @@
 <div id="Lat"></div>
 <div id="Long"></div>
 <div id="Error"></div>
+<input id="radiusNum" type="number" value="0.5" min="0" max="30" onchange="drawRadius();" step="0.01">
 <button type="button" onclick="runSim();">Start Simulation</button>
 
 <!-- <script type="text/javascript" charset="utf-8">
@@ -161,11 +162,7 @@
     const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     const tiles = L.tileLayer(tileUrl, { attribution });
     tiles.addTo(mymap);
-    var staticCircle = L.circle([lat, long], {
-        color: 'red',
-        radius: 200
-    });
-    staticCircle.addTo(mymap);
+    radius = document.getElementById("radiusNum");
     var markers = {};
     let locations = JSON.parse('<%-pois%>');
         
@@ -182,13 +179,13 @@
         }
     }
     var circle;
-    function drawRadius(position){
+    function drawRadius(){
         if (mymap.hasLayer(circle)) {
             circle.remove();
         }
-        circle = L.circle([position.coords.latitude, position.coords.longitude], {
+        circle = L.circle([lat, long], {
             color: 'red',
-            radius: 1609.34
+            radius: radius.value * 1609.34
         }).addTo(mymap)
     }
 
@@ -207,17 +204,17 @@
         long += 0.001000;
         document.getElementById("Lat").innerHTML = lat;
         document.getElementById("Long").innerHTML = long.toFixed(6);
-        if (mymap.hasLayer(staticCircle)) {
-            staticCircle.remove();
+        if (mymap.hasLayer(circle)) {
+            circle.remove();
         }
-        staticCircle = L.circle([lat, long], {
+        circle = L.circle([lat, long], {
             color: 'red',
-            radius: 200
+            radius: radius.value * 1609.34
         }).addTo(mymap);
         for(var i = 0; i < locations.length; i++){
             var poi = locations[i];
-            var dist = mymap.distance(poi.latlng, staticCircle.getLatLng());
-            var inSide = dist < staticCircle.getRadius();
+            var dist = mymap.distance(poi.latlng, circle.getLatLng());
+            var inSide = dist < circle.getRadius();
             if(!inSide){
                 markers[poi.id].remove();
             }else{
