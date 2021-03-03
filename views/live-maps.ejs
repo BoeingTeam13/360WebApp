@@ -15,7 +15,7 @@
     var long = -117.409321;
     var mymap = L.map('mapid').setView([47.6670, -117.4014], 11);
     const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-    const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    const tileUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
     const tiles = L.tileLayer(tileUrl, { attribution });
     tiles.addTo(mymap);
     radius = document.getElementById("radiusNum");
