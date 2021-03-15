@@ -1,5 +1,6 @@
 <%- include('partials/header') -%>
 
+
 <h1>This is the live maps page!</h1>
 
 <div id="mapid" style="height: 500px; width: 500px; position: absolute; top: 26%; left: 30%;"></div>
@@ -9,6 +10,13 @@
 <div id="Error"></div>
 <input id="radiusNum" type="number" value="0.5" min="0" max="30" onchange="drawRadius();" step="0.01">
 <button type="button" onclick="runSim();">Start Simulation</button>
+
+<table id="myTable">
+    <tr>
+        <th>Name:</th>
+        <th>Description:</th>
+    </tr>
+</table>
 
 <script>
     var lat = 47.667477;
@@ -73,10 +81,25 @@
             var inSide = dist < circle.getRadius();
             if(!inSide){
                 markers[poi.id].remove();
+                var row = document.getElementById(poi.id);
+                row.style.display = 'none';
             }else{
                 markers[poi.id].addTo(mymap);
+                var row = document.getElementById(poi.id);
+                row.style.display = '';
             }
-        }  
+        }
+    }
+    for(var i = 0; i < locations.length; i++){
+        var poi = locations[i];
+        var table = document.getElementById("myTable");
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = poi.name;
+        cell2.innerHTML = poi.latlng;
+        row.setAttribute("id", poi.id);
+        row.style.display = 'none';
     }
 </script>
 <%- include('partials/footer') -%>

@@ -146,3 +146,16 @@ footer {
     height: 720px;
     color: rgb(108, 108, 255);
 }
+
+table{
+    width: 400px;
+}
+
+th{
+    text-align: left;
+}
+
+table, th, td{
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
