@@ -156,7 +156,8 @@ footer {
 }
 
 table{
-    width: 400px;
+    margin-left: 1rem;
+    width: 100%;
 }
 
 th{
@@ -166,4 +167,8 @@ th{
 table, th, td{
     border: 1px solid #000;
     border-collapse: collapse;
+}
+
+#container360{
+    margin-left: 2rem;
 }
