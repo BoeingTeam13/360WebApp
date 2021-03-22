@@ -1,5 +1,6 @@
 <%- include('partials/header') -%>
 
+
 <h1>This is the live maps page!</h1>
 
 <div id="mapid" style="height: 500px; width: 500px; position: absolute; top: 26%; left: 30%;"></div>
@@ -21,7 +22,8 @@
     radius = document.getElementById("radiusNum");
     var markers = {};
     let locations = JSON.parse('<%-pois%>');
-        
+
+
     for (var i = 0; i < locations.length; i++) {  
         var poi = locations[i];
         markers[poi.id] = L.marker(poi.latlng).bindPopup(poi.name);
