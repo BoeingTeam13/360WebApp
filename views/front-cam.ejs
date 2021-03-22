@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h1 style="margin-top: 50px;">Demo</h1>
+    <h1 style="margin-top: 2rem; margin-bottom: 2rem;">Demo</h1>
   </div>
 </div>
 
@@ -30,15 +30,15 @@
                     source: "/videos/testVideo.mp4",
                     containerId: containerSelector,
                     // Change the following line from height: window.innerHeight | width: window:innderWidth
-                    height: 720,
-                    width: 1180
+                    height: 700,
+                    width: 1000
                 });
                 this.viewer.render();
                 window.onresize = function() {
                     // Change the following line from height: window.innerHeight | width: window:innderWidth
                     this.viewer.setSize({
-                        height: 720,
-                        width: 1180
+                        height: 700,
+                        width: 1000
                     });
                 }.bind(this);
                 document.querySelector(containerSelector).addEventListener('touchend', this.viewer.play.bind(this.viewer));
