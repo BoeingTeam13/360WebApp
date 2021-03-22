@@ -29,7 +29,8 @@
     radius = document.getElementById("radiusNum");
     var markers = {};
     let locations = JSON.parse('<%-pois%>');
-        
+
+
     for (var i = 0; i < locations.length; i++) {  
         var poi = locations[i];
         markers[poi.id] = L.marker(poi.latlng).bindPopup(poi.name);

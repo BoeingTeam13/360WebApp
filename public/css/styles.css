@@ -147,6 +147,14 @@ footer {
     color: rgb(108, 108, 255);
 }
 
+.dynamic-pois{
+    position: absolute;
+    margin: 2rem 2rem;
+    width: auto;
+    height: 8rem;
+    outline: 2px black;
+
+    
 table{
     width: 400px;
 }
