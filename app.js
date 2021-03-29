@@ -131,7 +131,22 @@ app.get('/live-maps', function(req, res) {
 });
 
 app.get('/front-cam', function(req, res) {
-    res.render('front-cam', {})
+    Poi.find({}, function(err, foundPois) {
+        if (foundPois.length === 0) {
+            Poi.insertMany(locations, function(err) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    console.log("Successfully added default items");
+                }
+            });
+            res.redirect("/front-cam");
+        } 
+        else {
+            res.render("front-cam", {pois: JSON.stringify(foundPois)});
+        }
+    });
 });
 
 app.get('/front-cam-live', function(req, res) {
